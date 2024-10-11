@@ -1,0 +1,31 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "BCICentralCypressAssignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:open": "npx cypress open",
+    "cy:of-login": "npx cypress run --browser chrome --headed --spec cypress/e2e/orderfaz/features/login.feature",
+    "cy:headless-run": "npx cypress run --browser chrome --headless --spec cypress/e2e/orderfaz/features/login.feature"
+  },
+  "author": "Kevin Valentino Panjaitan",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.1.2",
+    "cypress": "^13.15.0"
+  },
+  "dependencies": {
+    "@cypress/browserify-preprocessor": "^3.0.2",
+    "dayjs": "^1.11.13"
+  },
+  "cypress-cucumber-preprocessor": {
+    "pretty": {
+      "enabled": true
+    },
+    "html": {
+      "enabled": true
+    },
+    "nonGlobalStepDefinitions": true,
+    "step_definitions": "cypress/support/step_definitions/*"
+  }
+}
