@@ -5,8 +5,6 @@ class LoginPage {
         passField: '[data-cy="password-input"]',
         btnLogin: '[data-cy="submit-login"]',
     }
-
-
     navigateURL() {
         cy.visit('/login')
         cy.url().should('contain','/login');
@@ -27,10 +25,19 @@ class LoginPage {
         return this;
     }
     verifyLoginSuccess() {
-        cy.contains('Lihat Toko', {timeout: 50000});
+        cy.contains('Lihat Toko', {timeout: 10000});
     }
-    verifyLoginFailure() {
-        cy.contains('Akun tidak ditemukan, silahkan daftar terlebih dahulu', {timeout: 50000});
+    verifyInvalidEmail() {
+        cy.contains('Akun tidak ditemukan, silahkan daftar terlebih dahulu', {timeout: 10000});
+    }
+    verifyInvalidPass() {
+        cy.contains('Password salah, mohon coba lagi', {timeout: 10000});
+    }
+    verifyEmptyEmail() {
+        cy.contains('Email / no telepon tidak boleh kosong', {timeout: 10000});
+    }
+    verifyEmptyPass() {
+        cy.contains('Password tidak boleh kosong', {timeout: 10000});
     }
 }
 const logPage = new LoginPage();

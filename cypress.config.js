@@ -12,7 +12,8 @@ module.exports = defineConfig({
   e2e: {
     viewportWidth: 1920,
     viewportHeight: 1080,
-    baseUrl: "https://web.orderfaz.com",
+    baseUrl: "https://web.orderfaz.com", //production
+    // baseUrl: "https://webstaging.orderfaz.com/", //staging
     chromeWebSecurity: false, //bypass invalid certificate
     video: true,
     videoCompression: 32,
