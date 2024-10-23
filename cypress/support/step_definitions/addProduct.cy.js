@@ -22,14 +22,14 @@ Then('User click to the next steps', () => {
 Then('User add new bump offer', () => {
     prodPage.AddNewBumpOffer()
 })
-Then('User create new bump offer', () => {
-    prodPage.Cr8NewBumpOffer()
+Then('User create new bump offer with {string}', (InputNewBumpOffer) => {
+    prodPage.Cr8NewBumpOffer(InputNewBumpOffer)
 })
-Then('User fill bump title', () => {
-    prodPage.UserFillBumpTitle()
+Then('User fill bump title with {string}', (InputBumpTitle) => {
+    prodPage.UserFillBumpTitle(InputBumpTitle)
 })
-Then('User fill bump description', () => {
-    prodPage.UserFillBumpDesc()
+Then('User fill bump description with {string}', (InputBumpDesc) => {
+    prodPage.UserFillBumpDesc(InputBumpDesc)
 })
 Then('User fill bump image', () => {
     prodPage.UserFillBumpImg()
@@ -37,11 +37,11 @@ Then('User fill bump image', () => {
 Then('User check bump product title', () => {
     prodPage.UserCheckBumpProdTitle()
 })
-Then('User fill bump price', () => {
-    prodPage.UserFillBumpPrice()
+Then('User fill bump price {string}', (InputBumpPrice) => {
+    prodPage.UserFillBumpPrice(InputBumpPrice)
 })
-Then('User fill bump text label check', () => {
-    prodPage.UserFillBumpLabel()
+Then('User fill bump text label check', (InputBumpLabelCheck) => {
+    prodPage.UserFillBumpLabelCheck(InputBumpLabelCheck)
 })
 Then('User click finish edit', () => {
     prodPage.UserFinishEdit()

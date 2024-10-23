@@ -9,7 +9,7 @@ class ProductPage {
         //End of Section "Tambah Produk" from Dashboard
 
         //Start of Section "Tambah Produk" page
-        //Basic Information section
+        //Basic Information section (BI)
         BI_ProductName: '[data-cy="input-product-name"]', //Input Product Name
         BI_ProductCategory: '[data-cy="select-product-category"]', //Select Category Dropdown
         BI_EnterCategory: '#multiselect-option-160 > span', //Select Category "Fashion Pria"
@@ -17,7 +17,7 @@ class ProductPage {
         BI_ProductPhysc:'[data-cy="button-product-type-100"]', //Category Physical
         BI_ProductDgtl: '[data-cy="button-product-type-200"]', //Category Digital
 
-        //Price, Variant and Availability section
+        //Price, Variant and Availability section (PVA)
         PVA_isVariantFalse: '[data-cy="button-product-isVariant-false"]', //Varian Simple
         PVA_InputPrice: '[data-cy="input-product-price"]',
         PVA_InputCogs: '[data-cy="input-product-cogs"]',
@@ -44,7 +44,7 @@ class ProductPage {
         PVA_deleteAll_WS: '[data-cy="product-button-clear-wholesales"]',
         PVA_deletePer_WS: '[data-cy="product-button-delete-wholesales-2"]', //Delete second column of whole sale
 
-        //Weight and Volume
+        //Weight and Volume (WV)
         WV_ProductWeight: '[data-cy="input-product-volumetric-weight"]',
         WV_Weight_Grams: '[data-cy="select-product-volumetric-weight-unit"] > .multiselect-new-wrappper > .w-full',
         WV_Weight_Kg: '#multiselect-option-1000',
@@ -52,7 +52,7 @@ class ProductPage {
         WV_ProductWidth: '[data-cy="input-product-volumetric-width"]', //Lebar
         WV_ProductHeight: '[data-cy="input-product-volumetric-height"]', //Tinggi
         
-        //Media
+        //Media (MED)
         MED_Upload: '[data-cy="button-file-upload-media"]',
         MED_InputLink: '[data-cy="button-file-link-media"]',
         MED_SaveMedia: '[data-cy="button-dialog-yes"]',
@@ -61,7 +61,7 @@ class ProductPage {
         MED_CnclLinkBtn: '[data-cy="button-cancel-save-link"]',
         MED_CloseLinkBtn: '[data-cy="modal-button-close"]',
 
-        //Product Information
+        //Product Information (PI)
         PI_Description: '[data-cy="editor-description-product"]',
         PI_LoremIpsum: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula diam, cursus faucibus euismod et, pharetra quis ante. Sed placerat urna sit amet lacus fermentum, ac lacinia lectus pellentesque. Maecenas lacinia, leo nec posuere venenatis, dolor mi mattis tellus, non pellentesque nunc nulla eu ligula. Morbi porta rhoncus cursus. Cras pharetra fermentum eros, sed dapibus odio sollicitudin sed. Quisque ut augue velit. Curabitur rhoncus neque non venenatis sagittis. Nulla mattis sodales tellus, at cursus dui.',
         PI_ChckListPoint: '[data-cy="input-product-extra"]',
@@ -95,6 +95,7 @@ class ProductPage {
 
         //End of Section Tambah produk       
     }
+    //Checking element when product success created
 elementCheck = {
     Popup_close_btn: '.absolute > .material-symbols-outlined',
     Popup_See_Store_btn: ':nth-child(3) > .gap-y-2 > .gap-x-1\\.5 > a.flex > .secondary',
@@ -107,8 +108,8 @@ elementCheck = {
     Popup_Copy_Link_CO_btn: ':nth-child(4) > .gap-y-2 > .gap-x-2 > [icon="copy_all"]',
     Popup_Share_CO_btn: ':nth-child(4) > .gap-y-2 > .gap-x-2 > [text="Bagikan"]',
     Popup_Next_Product_btn: '[data-cy="button-dialog-cancel-link"]',
-    Popup_See_Product_List_btn: '[data-cy="button-dialog-yes-disabled"]'
-};
+    Popup_See_Product_List_btn: '[data-cy="button-dialog-yes-with-disabled"]',
+}
 
     SideDashboard() {
         cy.get(this.element.SideDashProduct)
@@ -287,34 +288,35 @@ elementCheck = {
         .click();
         return this;
     }
-    Cr8NewBumpOffer() {
+    Cr8NewBumpOffer(InputNewBumpOffer) {
         cy.get(this.element.Bump_title_product)
         .should('be.visible')
-        .type('OrderFaz Bump Offer')
+        .type(InputNewBumpOffer)
         cy.xpath(this.element.Bump_create_btn)
         .should('be.visible')
         .click();
         return this;
     }
-    UserFillBumpTitle() {
+    UserFillBumpTitle(InputBumpTitle) {
         cy.get(this.element.Bump_title_content)
         .should('be.visible')
         .clear()
-        .type('Ini Adalah Judul Bump');
+        .type(InputBumpTitle);
         return this;
     }
-    UserFillBumpDesc() {
+    UserFillBumpDesc(InputBumpDesc) {
         cy.get(this.element.Bump_desc)
         .should('be.visible')
         .clear()
-        .type('Ini Adalah Deskripsi');
+        .type(InputBumpDesc);
         return this;
     }
     UserFillBumpImg() {
         cy.get(this.element.Bump_add_img, {force: true})
-        .wait(1000)
+        .wait(3000)
         .selectFile('download.jpeg', { action: 'drag-drop', force: true })
         cy.get(this.element.Bump_cropImg_Svbtn)
+        .wait(3000)
         .click();
         return this;
     }
@@ -327,17 +329,17 @@ elementCheck = {
           });
         return this;
     }
-    UserFillBumpPrice() {
+    UserFillBumpPrice(InputBumpPrice) {
         cy.get(this.element.Bump_price)
         .should('be.visible')
-        .type('25000');
+        .type(InputBumpPrice);
         return this;
     }
-    UserFillBumpLabel() {
+    UserFillBumpLabelCheck(InputBumpLabelCheck) {
         cy.get(this.element.Bump_text_label_check)
         .should('be.visible')
         .clear()
-        .type('Ini adalah text label check')
+        .type(InputBumpLabelCheck)
         return this;
     }
     UserFinishEdit() {
@@ -390,8 +392,9 @@ elementCheck = {
         .should('be.visible')
         .log('Button "Buat produk selanjutnya" is visible')
         cy.get(this.elementCheck.Popup_See_Product_List_btn)
+        .wait(2000)
         .should('be.visible')
-        .log('Button "Lihat list produk" is visible')
+        .log('Button "Lihat list produk" is visible');
         return this;
     }
 
