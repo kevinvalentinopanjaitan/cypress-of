@@ -21,8 +21,14 @@ Test Automation using Cypress for OrderFaz
 
 ## Requirement Before Installation
 
-- Have latest Cypress
-- Have install latest node.js
+- Have latest version of Cypress at least Bundled node version 18.17.1
+```bash
+    npx cypress --version
+```
+- Have latest version node.js at least node v23.0.0
+```bash
+    node -v
+```
 
 
 ## Installation
