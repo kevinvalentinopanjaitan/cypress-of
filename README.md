@@ -19,6 +19,11 @@ Test Automation using Cypress for OrderFaz
 
 - browserify-preprocessor
 
+## Requirement Before Installation
+
+- Have latest Cypress
+- Have install latest node.js
+
 
 ## Installation
 
@@ -29,7 +34,7 @@ Step to Install
     2. cd path to project
     3. npm install cypress@latest --save-dev
     4. npx cypress open
-    5. npm install @badeball/cypress-cucumber-preprocessor
+    5. npm install --save-dev
 ```
     
 ## Execution
