@@ -29,7 +29,7 @@ Test Automation using Cypress for OrderFaz
 ```bash
     node -v
 ```
-
+If you meet the version requirement of cypress, skip step installation number 3
 
 ## Installation
 
@@ -39,8 +39,8 @@ Step to Install
     1. clone
     2. cd path to project
     3. npm install cypress@latest --save-dev
-    4. npx cypress open
-    5. npm install --save-dev
+    4. npm install --save-dev
+    5. npx cypress open
 ```
     
 ## Execution
