@@ -10,6 +10,8 @@ class ProductPage {
 
         //Start of Section "Tambah Produk" page
         //Basic Information section (BI)
+        BI_Physical: '[data-cy="button-product-type-100"]',
+        BI_Digital: '[data-cy="button-product-type-200"]',
         BI_ProductName: '[data-cy="input-product-name"]', //Input Product Name
         BI_ProductCategory: '[data-cy="select-product-category"]', //Select Category Dropdown
         BI_EnterCategory: '#multiselect-option-160 > span', //Select Category "Fashion Pria"
@@ -19,6 +21,7 @@ class ProductPage {
 
         //Price, Variant and Availability section (PVA)
         PVA_isVariantFalse: '[data-cy="button-product-isVariant-false"]', //Varian Simple
+        PVA_isVariantTrue: '[data-cy="button-product-isVariant-true"]', //Bervarian
         PVA_InputPrice: '[data-cy="input-product-price"]',
         PVA_InputCogs: '[data-cy="input-product-cogs"]',
         PVA_btn_Stocks: '[data-cy="button-product-stock-edit"]',
@@ -397,7 +400,34 @@ elementCheck = {
         .log('Button "Lihat list produk" is visible');
         return this;
     }
-
+    TypePhysical() {
+        cy.get(this.element.BI_Physical)
+        .wait(2000)
+        .should('be.visible')
+        .click();
+        return this;
+    }
+    TypeDigital() {
+        cy.get(this.element.BI_Digital)
+        .wait(2000)
+        .should('be.visible')
+        .click();
+        return this;
+    }
+    VariantSimple() {
+        cy.get(this.element.PVA_isVariantFalse)
+        .wait(2000)
+        .should('be.visible')
+        .click();
+        return this;
+    }
+    VariantVaries() { //Bervarian
+        cy.get(this.element.PVA_isVariantTrue)
+        .wait(2000)
+        .should('be.visible')
+        .click();
+        return this;
+    }
 }
 const prodPage = new ProductPage();
 export default prodPage;
