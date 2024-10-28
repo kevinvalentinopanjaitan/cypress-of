@@ -25,19 +25,19 @@ class LoginPage {
         return this;
     }
     verifyLoginSuccess() {
-        cy.contains('Lihat Toko', {timeout: 10000});
+        cy.contains('Lihat Toko', {timeout: 5000});
     }
     verifyInvalidEmail() {
-        cy.contains('Akun tidak ditemukan, silahkan daftar terlebih dahulu', {timeout: 10000});
+        cy.contains('Akun tidak ditemukan, silahkan daftar terlebih dahulu', {timeout: 5000});
     }
     verifyInvalidPass() {
-        cy.contains('Password salah, mohon coba lagi', {timeout: 10000});
+        cy.contains('Password salah, mohon coba lagi', {timeout: 5000});
     }
     verifyEmptyEmail() {
-        cy.contains('Email / no telepon tidak boleh kosong', {timeout: 10000});
+        cy.contains('Email / no telepon tidak boleh kosong', {timeout: 5000});
     }
     verifyEmptyPass() {
-        cy.contains('Password tidak boleh kosong', {timeout: 10000});
+        cy.contains('Password tidak boleh kosong', {timeout: 5000});
     }
 }
 const logPage = new LoginPage();

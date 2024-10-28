@@ -22,7 +22,12 @@ class ProductPage {
         //Price, Variant and Availability section (PVA)
         PVA_isVariantFalse: '[data-cy="button-product-isVariant-false"]', //Varian Simple
         PVA_isVariantTrue: '[data-cy="button-product-isVariant-true"]', //Bervarian
-        PVA_InputPrice: '[data-cy="input-product-price"]',
+        PVA_InputPriceSimple: '[data-cy="input-product-price"]',
+        PVA_OptVariant_btn: '[data-cy="button-add-variant-category"]',
+        PVA_InputVariantName: '[data-cy="inputTag-variant-type-1"]',
+        PVA_CategoryVariant: '[data-cy="select-variant-category-1-listbutton"]',
+        PVA_InputPriceVariant1: '[data-cy="input-price-variant-1"]',
+        PVA_InputPriceVariant2: '[data-cy="input-price-variant-2"]',
         PVA_InputCogs: '[data-cy="input-product-cogs"]',
         PVA_btn_Stocks: '[data-cy="button-product-stock-edit"]',
         PVA_InputStocks: '[data-cy="product-input-stock"]',
@@ -48,7 +53,11 @@ class ProductPage {
         PVA_deletePer_WS: '[data-cy="product-button-delete-wholesales-2"]', //Delete second column of whole sale
 
         //Weight and Volume (WV)
-        WV_ProductWeight: '[data-cy="input-product-volumetric-weight"]',
+        WV_WeightSimple_btn: '[data-cy="button-product-is-every-variant-weight-same-true"]',
+        WV_FieldWeightSimple: '[data-cy="input-product-volumetric-weight"]',
+        WV_VariantVaries: '[data-cy="button-product-is-every-variant-weight-same-false"]',
+        WV_WeightVariant1: '[data-cy="input-variant-weight-1"]',
+        WV_WeightVariant2: '[data-cy="input-variant-weight-2"]',
         WV_Weight_Grams: '[data-cy="select-product-volumetric-weight-unit"] > .multiselect-new-wrappper > .w-full',
         WV_Weight_Kg: '#multiselect-option-1000',
         WV_ProductLength:'[data-cy="input-product-volumetric-length"]', //Panjang
@@ -99,20 +108,23 @@ class ProductPage {
         //End of Section Tambah produk       
     }
     //Checking element when product success created
-elementCheck = {
-    Popup_close_btn: '.absolute > .material-symbols-outlined',
-    Popup_See_Store_btn: ':nth-child(3) > .gap-y-2 > .gap-x-1\\.5 > a.flex > .secondary',
-    Popup_Copy_Link_SF_btn: ':nth-child(3) > .gap-y-2 > .gap-x-2 > [icon="copy_all"]',
-    Popup_Share_SF_btn: ':nth-child(3) > .gap-y-2 > .gap-x-2 > [text="Bagikan"]',
-    Popup_See_CO_btn: ':nth-child(4) > .gap-y-2 > .gap-x-1\\.5 > a.flex > .secondary',
-    Popup_Edit_CO_btn: '.gap-x-1\\.5 > .py-1',
-    Popup_Link_CO_btn: '.w-fit > .border',
-    Popup_Embed_CO_btn: '.w-fit > .bg-white',
-    Popup_Copy_Link_CO_btn: ':nth-child(4) > .gap-y-2 > .gap-x-2 > [icon="copy_all"]',
-    Popup_Share_CO_btn: ':nth-child(4) > .gap-y-2 > .gap-x-2 > [text="Bagikan"]',
-    Popup_Next_Product_btn: '[data-cy="button-dialog-cancel-link"]',
-    Popup_See_Product_List_btn: '[data-cy="button-dialog-yes-with-disabled"]',
-}
+    elementCheck = {
+        Popup_close_btn: '.absolute > .material-symbols-outlined',
+        Popup_See_Store_btn: ':nth-child(3) > .gap-y-2 > .gap-x-1\\.5 > a.flex > .secondary',
+        Popup_Copy_Link_SF_btn: ':nth-child(3) > .gap-y-2 > .gap-x-2 > [icon="copy_all"]',
+        Popup_Share_SF_btn: ':nth-child(3) > .gap-y-2 > .gap-x-2 > [text="Bagikan"]',
+        Popup_See_CO_btn: ':nth-child(4) > .gap-y-2 > .gap-x-1\\.5 > a.flex > .secondary',
+        Popup_Edit_CO_btn: '.gap-x-1\\.5 > .py-1',
+        Popup_Link_CO_btn: '.w-fit > .border',
+        Popup_Embed_CO_btn: '.w-fit > .bg-white',
+        Popup_Copy_Link_CO_btn: ':nth-child(4) > .gap-y-2 > .gap-x-2 > [icon="copy_all"]',
+        Popup_Share_CO_btn: ':nth-child(4) > .gap-y-2 > .gap-x-2 > [text="Bagikan"]',
+        Popup_Next_Product_btn: '[data-cy="button-dialog-cancel-link"]',
+        Popup_See_Product_List_btn: '[data-cy="button-dialog-yes-with-disabled"]',
+
+        //Validate error
+        FormCreateProduct: '.sticky > .bg-red-50',
+    }
 
     SideDashboard() {
         cy.get(this.element.SideDashProduct)
@@ -149,7 +161,7 @@ elementCheck = {
         return this;
     }
     fillPVA() { //Pricing, Variant & Availability
-        cy.get(this.element.PVA_InputPrice)
+        cy.get(this.element.PVA_InputPriceSimple)
         .scrollIntoView({ easing: 'linear' })
         .should('be.visible')
         .type('500000') //Input Price with 500k
@@ -220,7 +232,7 @@ elementCheck = {
           return this;
     }
     fillWeightAndVolume() {
-        cy.get(this.element.WV_ProductWeight)
+        cy.get(this.element.WV_FieldWeightSimple)
         .should('be.visible')
         .type('10')
         cy.get(this.element.WV_ProductLength)
@@ -325,6 +337,7 @@ elementCheck = {
     }
     UserCheckBumpProdTitle() {
         cy.get(this.element.Bump_title_product_content)
+        .wait(3000)
         .then($el => {
             const value = $el.val();  // Get the value of the input or text field
             expect(value).to.equal("OrderFaz Bump Offer");  // Assert the expected value
@@ -335,6 +348,8 @@ elementCheck = {
     UserFillBumpPrice(InputBumpPrice) {
         cy.get(this.element.Bump_price)
         .should('be.visible')
+        .clear()
+        .wait(3000)
         .type(InputBumpPrice);
         return this;
     }
@@ -425,7 +440,138 @@ elementCheck = {
         cy.get(this.element.PVA_isVariantTrue)
         .wait(2000)
         .should('be.visible')
+        .click()
+        return this;
+    }
+    EmptyPriceSimple() {
+        cy.get(this.element.PVA_InputPriceSimple)
+        .wait(2000)
+        .should('be.visible')
+        .clear();
+        return this;
+    }
+    EmptyWeightPhysicalSimple() {
+        cy.get(this.element.WV_FieldWeightSimple)
+        .wait (2000)
+        .should('be.visible')
+        .clear();
+        return this;
+    }
+    EmptyPriceVariant() {
+        cy.get(this.element.PVA_CategoryVariant)
+        .click()
+        .wait(2000)
+        cy.contains('li', 'Ukuran') //Get the frist ul>li
+        .wait(2000)
+        .click()
+        cy.get(this.element.PVA_InputVariantName)
+        .wait(2000)
+        .should('be.visible')
+        .type('L{enter}XL{enter}')
+        cy.get(this.element.PVA_InputPriceVariant1)
+        .wait(2000)
+        .should ('be.visible')
+        .clear()
+        cy.get(this.element.PVA_InputPriceVariant2)
+        .wait(2000)
+        .should ('be.visible')
+        .clear();
+        return this;
+    }
+    EmptyWeightPhysicalVariant() {
+        cy.get(this.element.WV_VariantVaries)
+        .wait(2000)
+        .should('be.visible')
+        .click()
+        cy.get(this.element.WV_WeightVariant1)
+        .wait(2000)
+        .should('be.visible')
+        .clear()
+        cy.get(this.element.WV_WeightVariant2)
+        .wait(2000)
+        .should('be.visible')
+        .clear()
+    }
+    EmptyWeightDigitalSimple() {
+        cy.xpath(this.element.Nav_next_btn)
         .click();
+        return this;
+    }
+    EmptyWeightDigitalVariant() {
+        cy.xpath(this.element.Nav_next_btn)
+        .click();
+        return this;
+    }
+    ValidateFormPhysicalVariant() {
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Nama produk wajib diisi')
+        .and('have.text', 'Nama produk wajib diisi')
+        .log('Form has given error statement "Nama produk wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Kategori produk wajib diisi')
+        .and('have.text', 'Kategori produk wajib diisi')
+        .log('Form has given error statement "Kategori produk wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Harga satuan varian "L" wajib diisi')
+        .and('have.text', 'Harga satuan varian "L" wajib diisi')
+        .log('Form has given error statement "Harga satuan varian "L" wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Harga satuan varian "XL" wajib diisi')
+        .and('have.text', 'Harga satuan varian "XL" wajib diisi')
+        .log('Form has given error statement "Harga satuan varian "XL" wajib diisi"')
+        return this;
+    }
+    ValidateFormDigitalVariant() {
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Nama produk wajib diisi')
+        .and('have.text', 'Nama produk wajib diisi')
+        .log('Form has given error statement "Nama produk wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Kategori produk wajib diisi')
+        .and('have.text', 'Kategori produk wajib diisi')
+        .log('Form has given error statement "Kategori produk wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Harga satuan varian "L" wajib diisi')
+        .and('have.text', 'Harga satuan varian "L" wajib diisi')
+        .log('Form has given error statement "Harga satuan varian "L" wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Harga satuan varian "XL" wajib diisi')
+        .and('have.text', 'Harga satuan varian "XL" wajib diisi')
+        .log('Form has given error statement "Harga satuan varian "XL" wajib diisi"')
+        return this;
+    }
+    ValidateFormPhysicalSimple() {
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Nama produk wajib diisi')
+        .and('have.text', 'Nama produk wajib diisi')
+        .log('Form has given error statement "Nama produk wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Kategori produk wajib diisi')
+        .and('have.text', 'Kategori produk wajib diisi')
+        .log('Form has given error statement "Kategori produk wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Berat produk wajib diisi')
+        .and('have.text', 'Berat produk wajib diisi')
+        .log('Form has given error statement "Berat produk wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Harga satuan wajib diisi')
+        .and('have.text', 'Harga satuan wajib diisi')
+        .log('Form has given error statement "Harga satuan wajib diisi"')
+        return this;
+    }
+    ValidateFormDigitalSimple() {
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Nama produk wajib diisi')
+        .and('have.text', 'Nama produk wajib diisi')
+        .log('Form has given error statement "Nama produk wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Kategori produk wajib diisi')
+        .and('have.text', 'Kategori produk wajib diisi')
+        .log('Form has given error statement "Kategori produk wajib diisi"')
+        cy.get(this.elementCheck.FormCreateProduct)
+        .contains('Harga satuan wajib diisi')
+        .and('have.text', 'Harga satuan wajib diisi')
+        .log('Form has given error statement "Harga satuan wajib diisi"')
         return this;
     }
 }

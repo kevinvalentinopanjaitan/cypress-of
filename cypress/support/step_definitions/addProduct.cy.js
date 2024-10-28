@@ -38,10 +38,10 @@ Then('User fill bump image', () => {
 Then('User check bump product title', () => {
     prodPage.UserCheckBumpProdTitle()
 })
-Then('User fill bump price {string}', (InputBumpPrice) => {
+Then('User fill bump price with {string}', (InputBumpPrice) => {
     prodPage.UserFillBumpPrice(InputBumpPrice)
 })
-Then('User fill bump text label check', (InputBumpLabelCheck) => {
+Then('User fill bump text label check {string}', (InputBumpLabelCheck) => {
     prodPage.UserFillBumpLabelCheck(InputBumpLabelCheck)
 })
 Then('User click finish edit', () => {
@@ -81,5 +81,34 @@ Then('User choose variant {string}', (variant) => {
         prodPage.VariantSimple()
     } else {
         prodPage.VariantVaries()
+    }
+})
+Then('User leave blank on {string} price', (variant) => {
+    if(variant === 'Simple') {
+        prodPage.EmptyPriceSimple()
+    } else {
+        prodPage.EmptyPriceVariant()
+    }
+})
+Then('User leave blank on weight with type {string} and variant {string}', (type, variant) => {
+    if(type === 'Physical' && variant === 'Simple') {
+        prodPage.EmptyWeightPhysicalSimple();
+    } else if(type === 'Physical' && variant === 'Bervarian') {
+        prodPage.EmptyWeightPhysicalVariant();
+    } else if (type === 'Digital' && variant === 'Simple') {
+        prodPage.EmptyWeightDigitalSimple();
+    } else {
+        prodPage.EmptyWeightDigitalVariant();
+    }
+})
+Then('System validate the given error of type {string} and {string} product', (type, variant) => {
+    if(type === 'Physical' && variant === 'Simple') {
+        prodPage.ValidateFormPhysicalSimple()
+    } else if(type === 'Physical' && variant === 'Bervarian') {
+        prodPage.ValidateFormPhysicalVariant()
+    } else if (type === 'Digital' && variant === 'Simple') {
+        prodPage.ValidateFormDigitalSimple()
+    } else {
+        prodPage.ValidateFormDigitalVariant()
     }
 })
