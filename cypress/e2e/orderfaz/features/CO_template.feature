@@ -7,3 +7,5 @@ Feature: Create New Checkout Template
         Then User "successfully" login because "valid credentials"
 
     Scenario: User create new checkout template
+        When User navigate to checkout link page
+        And User choose design "<Design>"
