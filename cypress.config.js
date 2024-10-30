@@ -9,7 +9,19 @@ async function setupNodeEvents(on, config) {
 }
 
 module.exports = defineConfig({
+  retries: { //Retry when error with max retries 3 times
+    experimentalStrategy: 'detect-flake-but-always-fail',
+    experimentalOptions: {
+      maxRetries: 3,
+      stopIfAnyPassed: true,
+    },
+    // you must also explicitly set openMode and runMode to
+    // either true or false when using experimental retries
+    openMode: true,
+    runMode: true,
+  },
   e2e: {
+    experimentalRunAllSpecs: true, //Run all specs //npx cypress run
     viewportWidth: 1920,
     viewportHeight: 1080,
     // baseUrl: "https://web.orderfaz.com", //production

@@ -54,6 +54,11 @@ Headless Runner
 npm run cy:headless-run
 ```
 
+Headless Runner For All Specs
+```bash
+npm cypress run
+```
+
 ## Test Report
 
 ```bash

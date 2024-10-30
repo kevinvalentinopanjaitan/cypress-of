@@ -68,12 +68,12 @@ Then('User choose {string} of product', (type) => {
 })
 Then('User leave blank on product name', () => {
     cy.get(prodPage.element.BI_ProductName)
-    .wait(3000)
+    .wait(1000)
     .clear();
 })
 Then('User leave blank on category', () => {
     cy.get(prodPage.element.BI_ProductCategory)
-    .wait(3000)
+    .wait(1000)
     .clear();
 })
 Then('User choose variant {string}', (variant) => {
