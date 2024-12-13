@@ -5,8 +5,10 @@
   "description": "OrderFazCypress",
   "main": "index.js",
   "scripts": {
+    "e2e:chrome": "cypress run --browser chrome --headless",
+    "e2e:firefox": "cypress run --browser firefox --headless",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cy:open": "npx cypress open",
+    "cy:run": "npx cypress run",
     "cy:of-login": "npx cypress run --browser chrome --headed --spec cypress/e2e/orderfaz/features/login.feature",
     "cy:headless-run": "npx cypress run --browser chrome --headless --spec cypress/e2e/orderfaz/features/login.feature"
   },

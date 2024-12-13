@@ -128,10 +128,10 @@ class ProductPage {
 
     SideDashboard() {
         cy.get(this.element.SideDashProduct)
-        .wait(5000)
+        .wait(1000)
         .click()
         cy.get(this.element.SideDashProduct_ProductList)
-        .wait(5000)
+        .wait(1000)
         .click();
         return this;
     }
@@ -146,7 +146,7 @@ class ProductPage {
     }
     fillProductName() {
         cy.get(this.element.BI_ProductName)
-        .wait(3000)
+        .wait(1000)
         .type('Celana Panjang Jeans');
         return this;
     }
@@ -328,16 +328,16 @@ class ProductPage {
     }
     UserFillBumpImg() {
         cy.get(this.element.Bump_add_img, {force: true})
-        .wait(3000)
+        .wait(1000)
         .selectFile('download.jpeg', { action: 'drag-drop', force: true })
         cy.get(this.element.Bump_cropImg_Svbtn)
-        .wait(3000)
+        .wait(1000)
         .click();
         return this;
     }
     UserCheckBumpProdTitle() {
         cy.get(this.element.Bump_title_product_content)
-        .wait(3000)
+        .wait(1000)
         .then($el => {
             const value = $el.val();  // Get the value of the input or text field
             expect(value).to.equal("OrderFaz Bump Offer");  // Assert the expected value
@@ -349,7 +349,7 @@ class ProductPage {
         cy.get(this.element.Bump_price)
         .should('be.visible')
         .clear()
-        .wait(3000)
+        .wait(1000)
         .type(InputBumpPrice);
         return this;
     }
@@ -410,49 +410,49 @@ class ProductPage {
         .should('be.visible')
         .log('Button "Buat produk selanjutnya" is visible')
         cy.get(this.elementCheck.Popup_See_Product_List_btn)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .log('Button "Lihat list produk" is visible');
         return this;
     }
     TypePhysical() {
         cy.get(this.element.BI_Physical)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .click();
         return this;
     }
     TypeDigital() {
         cy.get(this.element.BI_Digital)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .click();
         return this;
     }
     VariantSimple() {
         cy.get(this.element.PVA_isVariantFalse)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .click();
         return this;
     }
     VariantVaries() { //Bervarian
         cy.get(this.element.PVA_isVariantTrue)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .click()
         return this;
     }
     EmptyPriceSimple() {
         cy.get(this.element.PVA_InputPriceSimple)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .clear();
         return this;
     }
     EmptyWeightPhysicalSimple() {
         cy.get(this.element.WV_FieldWeightSimple)
-        .wait (2000)
+        .wait(1000)
         .should('be.visible')
         .clear();
         return this;
@@ -460,35 +460,35 @@ class ProductPage {
     EmptyPriceVariant() {
         cy.get(this.element.PVA_CategoryVariant)
         .click()
-        .wait(2000)
+        .wait(1000)
         cy.contains('li', 'Ukuran') //Get the frist ul>li
-        .wait(2000)
+        .wait(1000)
         .click()
         cy.get(this.element.PVA_InputVariantName)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .type('L{enter}XL{enter}')
         cy.get(this.element.PVA_InputPriceVariant1)
-        .wait(2000)
+        .wait(1000)
         .should ('be.visible')
         .clear()
         cy.get(this.element.PVA_InputPriceVariant2)
-        .wait(2000)
+        .wait(1000)
         .should ('be.visible')
         .clear();
         return this;
     }
     EmptyWeightPhysicalVariant() {
         cy.get(this.element.WV_VariantVaries)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .click()
         cy.get(this.element.WV_WeightVariant1)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .clear()
         cy.get(this.element.WV_WeightVariant2)
-        .wait(2000)
+        .wait(1000)
         .should('be.visible')
         .clear()
     }
